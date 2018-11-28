@@ -52,3 +52,32 @@ npm install --save-dev webpack-cli
  
 安装onchange
 npm install onchange --save-dev
+
+全局安装jquery
+```angularjs
+resolve: {
+    alias: {
+      jquery: path.join(__dirname, "js/lib/jquery-2.0.3.min.js"),
+      mod: path.join(__dirname, "js/mod"),
+      less: path.join(__dirname, "less")
+    }
+  },
+plugins: [
+  new webpack.ProvidePlugin({
+    $: "jquery"
+  }),
+]
+```
+
+对require里的东西进行检测解析
+```angularjs
+module: {
+    rules: [{
+      test: /\.less$/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: ["css-loader", "less-loader", "postcss-loader"]
+      }) //把 css 抽离出来生成一个文件
+    }]
+  },
+```
