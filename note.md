@@ -81,3 +81,102 @@ module: {
     }]
   },
 ```
+
+npm install --save sequelize
+
+npm install --save sqlite3
+
+需要建database文件夹
+
+
+//解决拖动note的bug，使用$('body').on('mousemove')
+$('body').on('mousemove',(e)=>{
+  if(this.$note.hasClass('draggable')){
+    console.log(e.pageX, e.pageY);
+    this.$note.offset({
+      left:e.pageX - this.$note.data('relativePosition').x,
+      top:e.pageY - this.$note.data('relativePosition').y
+    })
+  }
+})
+
+安装passport
+npm install passport
+
+npm install passport-github
+
+npm install passport-jirengu
+
+
+```angularjs
+.note{
+  position: absolute;
+  color: #333;
+  width: 160px;
+  margin: 20px 10px;
+  transition: all 0.5s;
+  box-shadow: 4px 8px 30px 2px rgba(0,0,0,0.66);
+  .note-head{
+    height: 20px;
+    background-color: #ea9b35;
+    cursor: move;
+    font-size: 12px;
+    line-height: 20px;
+    padding-left: 10px;
+    color: #666;
+    &:hover .delete{
+      opacity: 1;
+    }
+
+    &:before{
+      position: absolute;
+      left: 50%;
+      top: -11px;
+      margin-left: -32px;
+      content: ' ';
+      display: block;
+      width: 64px;
+      height: 18px;
+      background: #35bba3;
+    }
+
+    &:after {
+      position: absolute;
+      left: 50%;
+      margin-left: 32px;
+      top: -11px;
+      z-index: -1;
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 5px solid #299683;
+      border-top: 18px solid transparent;
+    }
+  }
+
+  .note-content{
+    padding: 10px;
+    background-color: #efb04e;
+    outline: none;
+  }
+
+  .delete {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+}
+.note.new-note{
+  left: 50%;
+  top:30%;
+  //transform:translate(-50%,-50%);
+  margin-left: -80px;
+}
+```

@@ -1,0 +1,61 @@
+
+.note{
+  background-color: white;
+  position: absolute;
+  width: 230px;
+  display: flex;
+  padding: 20px 18px;
+  flex-direction: column;
+  border:1px solid #E8E8E8;
+  color:gray;
+  margin: 25px 13px 0;
+  .note-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    .note-time{}
+    .note-delete{}
+  }
+  .note-content{
+    border-top:2px solid #E9E9E9;
+    border-bottom:2px solid #E9E9E9;
+    padding:20px 0;
+    color:black;
+    font-size: 15px;
+  }
+  .note-imp-stars{
+    padding-top: 20px;
+    svg{
+      width:18px;
+      height:18px;
+      margin-right:8px;
+    }
+    svg.imp{
+      fill:#00D6EC;
+    }
+  }
+  .done{
+    margin-top: 18px;
+    width:60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #00D6EC;
+    height:25px;
+    color:white;
+    font-size: 12px;
+  }
+  .done.over{
+    background-color: #00DEAE;
+  }
+}
+.draggable{
+  opacity: 0.8;
+  cursor:move;
+  transition: none;
+  z-index: 111;
+}
+
+

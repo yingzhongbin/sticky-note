@@ -20,7 +20,7 @@ let EventCenter = (function(){
 })()
 let ec = EventCenter
 ec.on('a',function (arg) {
-  alert(arg)
+  // alert(arg)
 })
 ec.emit('a','fuck')
 module.exports = EventCenter

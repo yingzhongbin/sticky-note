@@ -1,13 +1,132 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>便利贴</title>
     <link rel='stylesheet' href='/css/style.css' />
     <link rel='stylesheet' href='/css/index.css' />
+
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div id="header">
+        <div id="header-container">
+          <div id="left-container">
+            <div id="img-container">
+              <img id="img1" src="../imgs/test2.png" alt="notelogo">
+              <img id="img2" src="../imgs/test.png" alt="notelogo">
+            </div>
+            <ul class="nav">
+              <li>全部</li>
+              <li>未完成</li>
+              <li>已完成</li>
+            </ul>
+          </div>
+
+          <ul class="user-area">
+            <% if (isLogin){ %>
+            <li><img src="<%= user.avatar %>" alt=""></li>
+            <li><span title="<%= user.username %>"><%= user.username %></span></li>
+            <li><span class="line"> | </span> </li>
+            <li><a class="logout" href="/auth/logout">注 销</a></li>
+            <%} else { %>
+            <li>
+              <a class="login" title="GitHub登录" href="/auth/github">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-github"></use>
+                </svg>
+                Github登录
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+    </div>
+    <div id="content">
+        <div class="note">
+            <div class="note-title">
+              <div class="note-time">2222年x月xx日</div>
+              <div class="note-delete">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-cha"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="note-content">
+              每位同学每次能申请1个毕设，完成后可以申请下一个毕设；
+              学习期间每人可申请6个毕设项目。
+            </div>
+            <div class="note-imp-stars">
+              <svg class="imp icon" aria-hidden="true">
+                <use xlink:href="#icon-star"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-star"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-star"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-star"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-star"></use>
+              </svg>
+            </div>
+            <div class="done">
+              已完成
+            </div>
+        </div>
+    </div>
+    <div id="new-note-cover"></div>
+    <div id="new-note-container">
+      <div id="new-note">
+        <div class="new-note-title-container">
+          <div class="new-note-title">添加新便签</div>
+          <div class="note-delete">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-cha"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="new-note-content">
+          <textarea name="" placeholder="输入内容"></textarea>
+        </div>
+        <div class="new-note-imp-stars">
+          <p>重要星级：</p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-star"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-star"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-star"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-star"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-star"></use>
+          </svg>
+        </div>
+        <div id="add-new-note">
+          添&nbsp;&nbsp;加
+        </div>
+      </div>
+    </div>
+    <div id="fix-container" style="">
+      <div id="up-icon">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-up1"></use>
+        </svg>
+      </div>
+      <div id="add-icon" class="add-note">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-add"></use>
+        </svg>
+      </div>
+    </div>
+    <audio muted autoplay loop src=""></audio>
     <script src="/js/index.js"></script>
+    <!--<button id="play">dianwo</button>-->
   </body>
 </html>

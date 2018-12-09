@@ -4,15 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var passport = require('passport');
-// var session = require('express-session');
+var session = require('express-session');
 
 var index = require('./routes/index');
 var xxxRouter = require('./routes/xxx');
 // var all = require('./routes/all');
-// var api = require('./routes/api');
-// var auth = require('./routes/auth');
-
+var api = require('./routes/api')
+var auth = require('./routes/auth')
 var app = express();
 
 // view engine setup
@@ -26,14 +26,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(session({secret: 'sessionsecret'}));
+app.use(session({secret: 'sessionsecasdadadadadret'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
+
 app.use('/', index); //我的便签
 // app.use('/all', all); //全部便签
-// app.use('/api', api); //ajax 接口
-// app.use('/auth', auth); //登录
+app.use('/api',api) //ajax接口
+app.use('/auth',auth)//登录
 app.use('/xxx', xxxRouter);
 
 // catch 404 and forward to error handler
@@ -55,3 +59,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
