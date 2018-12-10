@@ -21,12 +21,6 @@ router.get('/notes', function(req, res, next) {
   });
 });
 router.post('/notes/add', function(req, res, next) {
-  console.log('/notes/add');
-  console.log('stars',req.body);
-  console.log('stars',req.body.stars);
-  console.log('over',req.body.over);
-  console.log(typeof req.body.stars);
-  console.log(typeof req.body.over);
   if(req.session.user){
     Note.create({
       content: req.body.content,
@@ -46,7 +40,9 @@ router.post('/notes/add', function(req, res, next) {
 router.post('/notes/update', function(req, res, next) {
   console.log(req.session.user.id);
   Note.update({
-    content: req.body.content
+    content: req.body.content,
+    over:req.body.over,
+    stars:req.body.stars,
   }, {
     where: {
       id: req.body.id,

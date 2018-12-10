@@ -7,7 +7,16 @@ let Waterfall = require('../mod/waterfall.js')
 let Note = require('../mod/note.js').Note
 // new Note({context:"fuck"})
 
+//note edit
+// $('.edit').on('mouseout',()=>{
+//   console.log('edit out');
+//   $('.edit').removeClass('edit')
+// })
 
+//回到顶部
+$('#up-icon').on('click',()=>{
+  window.scrollTo(0, 0);
+})
 
 //跳转到note前的页面准备
 $('.add-note').on('click', function(){
@@ -19,29 +28,29 @@ $('.add-note').on('click', function(){
   }
 })
 
-//添加note前的页面准备
+//添加note前的页面准备 imp星级计算
 $('.new-note-imp-stars svg')
     .on('mouseover',function(e) {
-  e.currentTarget.classList.add('imp')
-  for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
-    $(e.currentTarget).prevAll()[i].classList.add('imp')
-  }
-})
+      e.currentTarget.classList.add('imp')
+      for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
+        $(e.currentTarget).prevAll()[i].classList.add('imp')
+      }
+    })
     .on('click',function(e) {
-  e.currentTarget.classList.add('chosen')
-  for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
-    $(e.currentTarget).prevAll()[i].classList.add('chosen')
-  }
-  for(let i=0;i<$(e.currentTarget).nextAll('svg').length;i++){
-    $(e.currentTarget).nextAll()[i].classList.remove('chosen')
-  }
-})
+      e.currentTarget.classList.add('chosen')
+      for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
+        $(e.currentTarget).prevAll()[i].classList.add('chosen')
+      }
+      for(let i=0;i<$(e.currentTarget).nextAll('svg').length;i++){
+        $(e.currentTarget).nextAll()[i].classList.remove('chosen')
+      }
+    })
     .on('mouseout',function(e) {
-  e.currentTarget.classList.remove('imp')
-  for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
-    $(e.currentTarget).prevAll()[i].classList.remove('imp')
-  }
-})
+      e.currentTarget.classList.remove('imp')
+      for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
+        $(e.currentTarget).prevAll()[i].classList.remove('imp')
+      }
+    })
 
 
 // 添加一条note储存到数据库
@@ -53,6 +62,7 @@ $('#add-new-note').on('click', (e) => {
   //清空添加便签框
   $(newNote.children()[1]).children('textarea').val('')
 
+  //获取imp星级
   let svgs = $(newNote.children()[2]).find('svg')
   let stars = 0
   for(let i=0;i<svgs.length;i++){
@@ -62,7 +72,7 @@ $('#add-new-note').on('click', (e) => {
     }
   }
   console.log('清空添加便签框');
-  NoteManager.add({stars,content})
+  NoteManager.add({stars,content,className:'new'})
 
   $('#new-note-cover').css('display','none')
   $('#new-note-container').css('display','none')

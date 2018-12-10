@@ -77,16 +77,14 @@ Note.prototype = {
       this.$note.find('.note-imp-stars').children()[i].classList.add('imp')
     }
 
+    // add的 添加className
+    console.log('tempOptions');
+    console.log(tempOptions);
+    if(tempOptions.className === 'new'){
+      this.$note[0].classList.add(tempOptions.className)
+    }
+    this.state = tempOptions
     $('#content').append(this.$note)
-
-    // 点击完成
-    // console.log(this.$note);
-    // console.log(this.$note.find('.done'));
-    //     .on('click',function () {
-    //   let doneTemp = '<span class>已完成</span>'
-    //   console.log(this.$note.find('.done'));
-    //   // .empty().append($(doneTemp))
-    // })
 
   },
 
@@ -121,36 +119,53 @@ Note.prototype = {
 
   bindEvents(){
     // 点击删除
-    this.$note.find('.delete').on('click',()=>{
+    this.$note.find('.note-delete').on('click',()=>{
       this.delete()
     })
-    this.$note.find('.note-content').on('blur',()=>{
+
+    // 移出更新
+    this.$note.on('mouseleave',()=>{
+      //获取imp星级
+      let svgs = this.$note.find('.note-imp-stars').find('svg')
+      let stars = 0
+      for(let i=0;i<svgs.length;i++){
+        console.log(svgs[i].classList);
+        if(svgs[i].classList[1] === 'imp' || svgs[i].classList[0] === 'imp'){
+          console.log('哈');
+          stars++
+        }
+      }
+      console.log(stars);
+
+      // 获取note content
       let content = this.$note.find('.note-content').html()
-      if(this.$note.hasClass('new-note')){
-        console.log('wozaizili');
-        this.add(content)
-      }else{
-        console.log('wozaizili22222');
-        this.update(content,this.$note.attr('data-id'))
+
+      //获取是否完成
+      let over = 0
+      if(this.$note.find('.done.over')){
+        over = 1
       }
-    })
-    this.$note.find('.note-head').on('mousedown',(e)=>{
-      this.$note.addClass('draggable')//便利贴变暗
-      // 设定鼠标到便利贴的位置数据
-      let x = e.pageX - this.$note.offset().left
-      let y = e.pageY - this.$note.offset().top
-      this.$note.data('relativePosition',{x,y})
-    }).on('mouseup',()=>{
-      this.$note.removeClass('draggable')//便利贴变亮
-    })
-    $('body').on('mousemove',(e)=>{
-      if(this.$note.hasClass('draggable')){
-        console.log(e.pageX, e.pageY);
-        this.$note.offset({
-          left:e.pageX - this.$note.data('relativePosition').x,
-          top:e.pageY - this.$note.data('relativePosition').y
-        })
+      let nowState = {
+        content,
+        stars,
+        over
       }
+      'content over stars'.split(' ').forEach((item)=>{
+        console.log('lai');
+        if(this.state[item] !== nowState[item]){
+          this.state[item] = nowState[item]
+          let opt = {
+            content,
+            stars,
+            id:this.$note.attr('data-id'),
+            over
+          }
+          console.log('true');
+          this.update(opt)
+        }
+      })
+
+
     })
 
     //点击实现完成
@@ -159,6 +174,19 @@ Note.prototype = {
       this.$note.find('.done.over').empty().append($(doneTemp))
           .removeClass('over')
     })
+
+    //imp星级改变
+    this.$note.find('.note-imp-stars').find('svg')
+        .on('click',function(e) {
+          console.log('clickd');
+          e.currentTarget.classList.add('imp')
+          for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
+            $(e.currentTarget).prevAll()[i].classList.add('imp')
+          }
+          for(let i=0;i<$(e.currentTarget).nextAll('svg').length;i++){
+            $(e.currentTarget).nextAll()[i].classList.remove('imp')
+          }
+        })
 
   },
 
@@ -180,18 +208,14 @@ Note.prototype = {
 
   add(options){
     console.log('add');
-    console.log(options);
-    console.log(typeof options.stars);
     $.post('/api/notes/add',options)
         .done((res)=>{
           console.log(res);
           if(res.status === 0){
-            Toast('xxx添加成功')
-            console.log('success');
-            console.log(res.data);
-            console.log($('#content').find('.note.new-note'));
-            $('.note.new-note').attr('data-id',res.data.id)
-            $('.note.new-note').removeClass('new-note')
+            Toast('添加成功')
+            console.log('添加成功success');
+            $('.note.new').attr('data-id',res.data.id)
+            $('.note.new').removeClass('new')
             console.log('success');
             Event.emit("waterfall")
           }else{
@@ -201,11 +225,10 @@ Note.prototype = {
         })
   },
 
-  update(content,id){
+  update(options){
     console.log('update');
-    console.log(content);
-    console.log(id);
-    $.post('/api/notes/update',{content,id})
+    console.log(options);
+    $.post('/api/notes/update',options)
         .done((res)=>{
           if(res.status === 0){
             Toast('更新成功')

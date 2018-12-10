@@ -21,7 +21,7 @@ let Waterfall = (function(){
     // 各列宽度
     let itemWidth = $(items[0]).outerWidth(true)
     // 共几列
-    let columnNum = Math.floor($(window).width()/itemWidth)
+    let columnNum = Math.floor(980/itemWidth)
     // 各列高度数组
     let colHeights = []
     // 初始化高度数组
