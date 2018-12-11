@@ -7,12 +7,31 @@ let Waterfall = require('../mod/waterfall.js')
 let Note = require('../mod/note.js').Note
 // new Note({context:"fuck"})
 
-//note edit
-// $('.edit').on('mouseout',()=>{
-//   console.log('edit out');
-//   $('.edit').removeClass('edit')
-// })
+//nav点击设置
+//nav-all设置
+$('#nav-all').on('click',()=>{
+  $('#content').empty()
+  NoteManager.load()
 
+})
+//nav-no-over设置 未完成 0
+$('#nav-no-over').on('click',()=>{
+  $('#content').empty()
+  NoteManager.load(0)
+})
+//nav-over设置 完成 1
+$('#nav-over').on('click',()=>{
+  $('#content').empty()
+  NoteManager.load(1)
+})
+
+
+//设置fix-container随页面滚动而滚动
+$('#fix-container').css('top',(window.scrollY+window.innerHeight-200)+'px')
+$(window).on('scroll',()=>{
+  console.log(window.scrollY)
+  $('#fix-container').css('top',(window.scrollY+window.innerHeight-200)+'px')
+})
 //回到顶部
 $('#up-icon').on('click',()=>{
   window.scrollTo(0, 0);

@@ -3,16 +3,32 @@ var Note = require('./note').Note
 var Waterfall = require('./waterfall')
 
 var NoteManager = (function(){
-  function load(){
+  function load(choose = 2){
     $.get('api/notes')
         .done(function(res){
           if(res.status === 0){
-            $.each(res.data, function (index, value) {
-              let options = Object.assign({},value)
-              new Note(options)
-              Waterfall.init('#content')
-            })
-            console.log('api/notes true');
+            if(choose === 2){
+              $.each(res.data, function (index, value) {
+                console.log(value);
+                let options = Object.assign({},value)
+                new Note(options)
+              })
+            }else if(choose === 1){//over
+              $.each(res.data, function (index, value) {
+                let options = Object.assign({},value)
+                if(options.over == 1){
+                  new Note(options)
+                }
+              })
+            }else{
+              $.each(res.data, function (index, value) {
+                let options = Object.assign({},value)
+                if(options.over == 0){
+                  new Note(options)
+                }
+              })
+            }
+            Waterfall.init('#content')
             localStorage.setItem('login',true)
           }else{
             Toast(res.errorMsg)
@@ -29,8 +45,9 @@ var NoteManager = (function(){
     options = Object.assign({},options,{over:false})
     newNote.add(options)
     console.log('NoteManager');
-    console.log(typeof options.stars);
-    // Waterfall.init('#content')
+    Waterfall.init('#content')
+    window.scrollTo(0,document.body.scrollHeight);
+
   }
   return {
     add,
