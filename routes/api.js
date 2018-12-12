@@ -22,6 +22,7 @@ router.get('/notes', function(req, res, next) {
 });
 router.post('/notes/add', function(req, res, next) {
   if(req.session.user){
+    console.log(req.body);
     Note.create({
       content: req.body.content,
       uid:req.session.user.id,

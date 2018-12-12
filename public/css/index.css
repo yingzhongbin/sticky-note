@@ -306,6 +306,9 @@ li {
   fill: currentColor;
   overflow: hidden;
 }
+#music-close {
+  display: none;
+}
 .toast {
   position: fixed;
   left: 50%;

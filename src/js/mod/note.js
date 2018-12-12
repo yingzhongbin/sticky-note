@@ -210,6 +210,7 @@ Note.prototype = {
     console.log('add');
     $.post('/api/notes/add',options)
         .done((res)=>{
+          console.log('addddddd');
           console.log(res);
           if(res.status === 0){
             Toast('添加成功')

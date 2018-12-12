@@ -43,6 +43,7 @@ var NoteManager = (function(){
   function add(options){
     let newNote = new Note(options)
     options = Object.assign({},options,{over:false})
+    console.log('add options');
     newNote.add(options)
     console.log('NoteManager');
     Waterfall.init('#content')

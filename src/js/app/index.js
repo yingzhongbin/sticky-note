@@ -125,14 +125,58 @@ $('.note-delete').on('click',function (e) {
 let NoteManager = require('../mod/note-manager.js').NoteManager
 NoteManager.load()
 
+// 设定音乐
+let audio = document.getElementById("music");
+$('#music-open').on('click',function () {
+  console.log('music-open');
+  audio.play();
+  $('#music-open').hide()
+  $('#music-close').show()
+})
+$('#music-close').on('click',function () {
+  console.log('music-close');
+  audio.pause();
+  $('#music-close').hide()
+  $('#music-open').show()
+})
+
+
 
 //瀑布流布局
 Event.on('waterfall',function(){
   Waterfall.init('#content')
 })
 
-// 设定音乐
-$('#play').on('click',function () {
-  $('audio')[0].play()
-})
 
+
+
+//设定welcome note时间
+$('.note.welcome').find('.note-time').html(getTime())
+function getTime(time){
+  var date
+  if(time){
+    // 获取当前日期
+    date = new Date(time);
+  }else{
+    date = new Date();
+  }
+  // 获取当前月份
+  var nowMonth = date.getMonth() + 1;
+
+  // 获取当前是几号
+  var strDate = date.getDate();
+
+  // 对月份进行处理，1-9月在前面添加一个“0”
+  if (nowMonth >= 1 && nowMonth <= 9) {
+    nowMonth = "0" + nowMonth;
+  }
+
+  // 对月份进行处理，1-9号在前面添加一个“0”
+  if (strDate >= 0 && strDate <= 9) {
+    strDate = "0" + strDate;
+  }
+
+  // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+  var nowDate = date.getFullYear() + '年' + nowMonth + '月' + strDate + '日';
+  return nowDate
+}
