@@ -145,6 +145,7 @@ body {
   margin-bottom: 20px;
   transition: .3s;
   box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
 }
 #fix-container #up-icon:hover {
   transform: scale(1.1);
@@ -165,6 +166,7 @@ body {
   align-items: center;
   transition: .3s;
   box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
 }
 #fix-container #add-icon:hover {
   transform: scale(1.1);
@@ -243,6 +245,7 @@ body {
   position: relative;
 }
 #new-note-container #new-note .new-note-title-container .note-delete {
+  cursor: pointer;
   position: absolute;
   right: 5px;
   top: 7px;
@@ -278,6 +281,7 @@ body {
 #new-note-container #new-note .new-note-imp-stars svg {
   fill: #DBDBDB;
   margin-right: 10px;
+  cursor: pointer;
 }
 #new-note-container #new-note .new-note-imp-stars svg.imp {
   fill: #00D6EC;
@@ -286,6 +290,7 @@ body {
   fill: #00D6EC;
 }
 #new-note-container #new-note #add-new-note {
+  cursor: pointer;
   color: white;
   background-color: #00DDAC;
   font-size: 14px;
@@ -380,6 +385,9 @@ li {
   justify-content: space-between;
   padding-bottom: 20px;
 }
+.note .note-title .note-delete {
+  cursor: pointer;
+}
 .note .note-content {
   border-top: 2px solid #E9E9E9;
   border-bottom: 2px solid #E9E9E9;
@@ -394,6 +402,7 @@ li {
   width: 18px;
   height: 18px;
   margin-right: 8px;
+  cursor: pointer;
 }
 .note .note-imp-stars svg.imp {
   fill: #00D6EC;
@@ -415,6 +424,19 @@ li {
 }
 .note .done.over {
   background-color: #00DEAE;
+  cursor: pointer;
+}
+.note.welcome {
+  cursor: text;
+}
+.note.welcome .note-title .note-delete {
+  cursor: text;
+}
+.note.welcome .note-imp-stars svg {
+  cursor: text;
+}
+.note.welcome .done.over {
+  cursor: text;
 }
 .draggable {
   opacity: 0.8;

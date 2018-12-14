@@ -20,7 +20,9 @@
     justify-content: space-between;
     padding-bottom: 20px;
     .note-time{}
-    .note-delete{}
+    .note-delete{
+      cursor: pointer;
+    }
   }
   .note-content{
     border-top:2px solid #E9E9E9;
@@ -35,6 +37,7 @@
       width:18px;
       height:18px;
       margin-right:8px;
+      cursor: pointer;
     }
     svg.imp{
       fill:#00D6EC;
@@ -54,6 +57,30 @@
   }
   .done.over{
     background-color: #00DEAE;
+    cursor: pointer;
+  }
+}
+.note.welcome{
+  cursor: text;
+  .note-title{
+    .note-time{}
+    .note-delete{
+      cursor: text;
+    }
+  }
+  .note-content{
+  }
+  .note-imp-stars{
+    svg{
+      cursor: text;
+    }
+    svg.imp{
+    }
+  }
+  .done{
+  }
+  .done.over{
+    cursor: text;
   }
 }
 .draggable{
