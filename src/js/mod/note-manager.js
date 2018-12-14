@@ -7,39 +7,68 @@ var NoteManager = (function(){
     $.get('api/notes')
         .done(function(res){
           if(res.status === 0){
-            if(choose === 2){
+            if(choose === 2 && res.data[0] !== undefined){
               $.each(res.data, function (index, value) {
-                console.log('choose === 2');
-                console.log(value);
                 let options = Object.assign({},value)
                 new Note(options)
               })
-            }else if(choose === 1){//over
+            }else if(choose === 1 && res.data[0] !== undefined){//over
+              console.log(res.data[0]);
               $.each(res.data, function (index, value) {
-                console.log('choose === 1');
-                console.log(value);
                 let options = Object.assign({},value)
                 if(options.over == 1){
-                  console.log('1111111111');
                   new Note(options)
                 }
               })
-            }else{
+            }else if(res.data[0] !== undefined){
+              console.log(res.data[0]);
               $.each(res.data, function (index, value) {
-                console.log('choose === 0');
-                console.log(value);
                 let options = Object.assign({},value)
                 if(options.over == 0){
-                  console.log('000000');
                   new Note(options)
                 }
               })
             }
+            let welcome = `
+            <div class="note welcome">
+              <div class="note-title">
+                <div class="note-time">xxxx年x月xx日</div>
+                <div class="note-delete">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-cha"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="note-content">
+                欢迎使用FDonkey在线便利贴！
+              </div>
+              <div class="note-imp-stars">
+                <svg class="imp icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="imp icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="imp icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+              </div>
+              <div class="done">
+                已完成
+              </div>
+            </div>
+            `
+            $('#content').prepend($(welcome))
             Waterfall.init('#content')
             localStorage.setItem('login',true)
           }else{
             Toast(res.errorMsg)
-            console.log('api/notes false');
             localStorage.setItem('login',false)
           }
         })
@@ -50,9 +79,7 @@ var NoteManager = (function(){
   function add(options){
     let newNote = new Note(options)
     options = Object.assign({},options,{over:false})
-    console.log('add options');
     newNote.add(options)
-    console.log('NoteManager');
     Waterfall.init('#content')
     window.scrollTo(0,document.body.scrollHeight);
 

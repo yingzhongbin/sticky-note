@@ -93,39 +93,68 @@ var NoteManager = (function(){
     $.get('api/notes')
         .done(function(res){
           if(res.status === 0){
-            if(choose === 2){
+            if(choose === 2 && res.data[0] !== undefined){
               $.each(res.data, function (index, value) {
-                console.log('choose === 2');
-                console.log(value);
                 let options = Object.assign({},value)
                 new Note(options)
               })
-            }else if(choose === 1){//over
+            }else if(choose === 1 && res.data[0] !== undefined){//over
+              console.log(res.data[0]);
               $.each(res.data, function (index, value) {
-                console.log('choose === 1');
-                console.log(value);
                 let options = Object.assign({},value)
                 if(options.over == 1){
-                  console.log('1111111111');
                   new Note(options)
                 }
               })
-            }else{
+            }else if(res.data[0] !== undefined){
+              console.log(res.data[0]);
               $.each(res.data, function (index, value) {
-                console.log('choose === 0');
-                console.log(value);
                 let options = Object.assign({},value)
                 if(options.over == 0){
-                  console.log('000000');
                   new Note(options)
                 }
               })
             }
+            let welcome = `
+            <div class="note welcome">
+              <div class="note-title">
+                <div class="note-time">xxxx年x月xx日</div>
+                <div class="note-delete">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-cha"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="note-content">
+                欢迎使用FDonkey在线便利贴！
+              </div>
+              <div class="note-imp-stars">
+                <svg class="imp icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="imp icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="imp icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-star"></use>
+                </svg>
+              </div>
+              <div class="done">
+                已完成
+              </div>
+            </div>
+            `
+            $('#content').prepend($(welcome))
             Waterfall.init('#content')
             localStorage.setItem('login',true)
           }else{
             Toast(res.errorMsg)
-            console.log('api/notes false');
             localStorage.setItem('login',false)
           }
         })
@@ -136,9 +165,7 @@ var NoteManager = (function(){
   function add(options){
     let newNote = new Note(options)
     options = Object.assign({},options,{over:false})
-    console.log('add options');
     newNote.add(options)
-    console.log('NoteManager');
     Waterfall.init('#content')
     window.scrollTo(0,document.body.scrollHeight);
 
@@ -384,6 +411,7 @@ module.exports = !function () {
 //nav-all设置
   $('#nav-all').on('click',(e)=>{
     if(!$('#nav-all').hasClass('active')){
+      console.log(document.getElementById('content').innerHTML);
       document.getElementById('content').innerHTML = "";
       $('#nav-all').addClass('active')
       $('#nav-no-over').removeClass('active')
@@ -394,6 +422,7 @@ module.exports = !function () {
 //nav-no-over设置 未完成 0
   $('#nav-no-over').on('click',()=>{
     if(!$('#nav-no-over').hasClass('active')) {
+      console.log(document.getElementById('content').innerHTML);
       document.getElementById('content').innerHTML = "";
       $('#nav-no-over').addClass('active')
       $('#nav-over').removeClass('active')
@@ -404,6 +433,7 @@ module.exports = !function () {
 //nav-over设置 完成 1
   $('#nav-over').on('click',()=>{
     if(!$('#nav-over').hasClass('active')) {
+      console.log(document.getElementById('content').innerHTML);
       document.getElementById('content').innerHTML = "";
       $('#nav-over').addClass('active')
       $('#nav-no-over').removeClass('active')
@@ -1792,8 +1822,6 @@ Note.prototype = {
     }
 
     // add的 添加className
-    console.log('tempOptions');
-    console.log(tempOptions);
     if(tempOptions.className === 'new'){
       this.$note[0].classList.add(tempOptions.className)
     }
@@ -1844,7 +1872,6 @@ Note.prototype = {
       let stars = 0
       for(let i=0;i<svgs.length;i++){
         if(svgs[i].classList[1] === 'imp' || svgs[i].classList[0] === 'imp'){
-          console.log('哈');
           stars++
         }
       }
@@ -1856,14 +1883,12 @@ Note.prototype = {
       if(this.$note.find('.done.over').html() === undefined){
         over = 1
       }
-      console.log(over);
       let nowState = {
         content,
         stars,
         over
       }
       'content over stars'.split(' ').forEach((item)=>{
-        console.log('lai');
         if(this.state[item] !== nowState[item]){
           this.state[item] = nowState[item]
           let opt = {
@@ -1872,8 +1897,6 @@ Note.prototype = {
             id:this.$note.attr('data-id'),
             over
           }
-          console.log('true');
-          console.log(opt);
           this.update(opt)
         }
       })
@@ -1891,7 +1914,6 @@ Note.prototype = {
     //imp星级改变
     this.$note.find('.note-imp-stars').find('svg')
         .on('click',function(e) {
-          console.log('clickd');
           e.currentTarget.classList.add('imp')
           for(let i=0;i<$(e.currentTarget).prevAll('svg').length;i++){
             $(e.currentTarget).prevAll()[i].classList.add('imp')
@@ -1906,8 +1928,6 @@ Note.prototype = {
   delete(){
     $.post('/api/notes/delete',{id:this.$note.attr('data-id')})
         .done((res)=>{
-          console.log('删除成功');
-          console.log(res);
           if(res.status === 0){
             Toast('删除成功')
             this.$note.remove()
@@ -1920,33 +1940,24 @@ Note.prototype = {
   },
 
   add(options){
-    console.log('add');
     $.post('/api/notes/add',options)
         .done((res)=>{
-          console.log('addddddd');
-          console.log(res);
           if(res.status === 0){
             Toast('添加成功')
-            console.log('添加成功success');
             $('.note.new').attr('data-id',res.data.id)
             $('.note.new').removeClass('new')
-            console.log('success');
             Event.emit("waterfall")
           }else{
-            console.log('xxx');
             Toast(res.errorMsg)
           }
         })
   },
 
   update(options){
-    console.log('update');
-    console.log(options);
     $.post('/api/notes/update',options)
         .done((res)=>{
           if(res.status === 0){
             Toast('更新成功')
-            console.log('update success');
             Event.emit("waterfall")
           }else{
             Toast(res.errorMsg)
