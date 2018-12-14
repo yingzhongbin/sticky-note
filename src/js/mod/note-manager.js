@@ -9,21 +9,28 @@ var NoteManager = (function(){
           if(res.status === 0){
             if(choose === 2){
               $.each(res.data, function (index, value) {
+                console.log('choose === 2');
                 console.log(value);
                 let options = Object.assign({},value)
                 new Note(options)
               })
             }else if(choose === 1){//over
               $.each(res.data, function (index, value) {
+                console.log('choose === 1');
+                console.log(value);
                 let options = Object.assign({},value)
                 if(options.over == 1){
+                  console.log('1111111111');
                   new Note(options)
                 }
               })
             }else{
               $.each(res.data, function (index, value) {
+                console.log('choose === 0');
+                console.log(value);
                 let options = Object.assign({},value)
                 if(options.over == 0){
+                  console.log('000000');
                   new Note(options)
                 }
               })

@@ -8,9 +8,11 @@
   -ms-flex-pack: center;
   justify-content: center;
   background-color: #fff;
+  box-shadow: 0px 12px 18px -9px rgba(0, 0, 0, 0.75);
+  z-index: 11;
 }
 #header #header-container {
-  height: 85px;
+  height: 74px;
   background-color: white;
   width: 980px;
   display: -ms-flexbox;
@@ -57,8 +59,9 @@
 #header #header-container #left-container ul.nav li {
   font-weight: 200;
   font-size: 20px;
-  margin-left: 60px;
+  margin-left: 47px;
   position: relative;
+  transition: opacity .5s;
 }
 #header #header-container #left-container ul.nav li:hover {
   color: #00DDAC;
@@ -78,6 +81,13 @@
   left: 10%;
   opacity: 0;
 }
+#header #header-container #left-container ul.nav li.active {
+  color: #00DDAC;
+  cursor: pointer;
+}
+#header #header-container #left-container ul.nav li.active:before {
+  opacity: 1;
+}
 #header #header-container a {
   min-width: 95px;
   display: -ms-flexbox;
@@ -96,11 +106,21 @@
   border-radius: 30px;
   font-weight: 200;
   font-size: 13px;
+  transition: box-shadow 0.2s;
+}
+#header #header-container a:hover {
+  box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.75);
 }
 #header #header-container a svg {
   width: 24px;
   height: 24px;
   margin-right: 5px;
+}
+body {
+  min-width: 980px;
+  overflow: scroll;
+  display: -ms-flexbox;
+  display: flex;
 }
 #fix-container {
   position: absolute;
@@ -152,33 +172,45 @@
 #fix-container #add-icon svg {
   fill: white;
 }
-#content {
+#content-container {
+  width: 980px;
+  height: 100%;
   margin: 0 auto;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+#content {
+  margin-top: 93px;
   position: relative;
   min-width: 980px;
-  padding: 35px 0 90px;
-}
-#new-note-cover {
+  padding: 0 0 90px;
   height: 100%;
-  width: 100%;
+}
+/*#new-note-cover{
+  min-height:100%;
+  width:100%;
   background-color: #2E5750;
   opacity: .8;
-  position: absolute;
   z-index: 11;
-  display: none;
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}*/
 #new-note-container {
   display: none;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
   z-index: 11;
-  height: 100%;
-  width: 100%;
   -ms-flex-pack: center;
   justify-content: center;
   -ms-flex-align: center;
   align-items: center;
-  position: absolute;
+  border: 30000px solid rgba(46, 87, 80, 0.8);
+  box-sizing: border-box;
 }
 #new-note-container #new-note {
   color: gray;
@@ -318,7 +350,7 @@ li {
   background: #fff;
   padding: 5px 10px;
   border-radius: 3px;
-  box-shadow: 0px 0px 3px 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   display: none;
 }
 .note {
@@ -333,6 +365,11 @@ li {
   border: 1px solid #E8E8E8;
   color: gray;
   margin: 23px 17px 0;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  transition: box-shadow 0.3s;
+}
+.note:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 .note .note-title {
   display: -ms-flexbox;

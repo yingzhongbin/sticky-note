@@ -15,11 +15,11 @@
               <img id="img2" src="../imgs/test.png" alt="notelogo">
             </div>
             <ul class="nav">
-              <li id="nav-all">全部</li>
+              <li id="nav-all" class="active">全部</li>
               <li id="nav-no-over">未完成</li>
               <li id="nav-over">已完成</li>
-              <li id="music-open">音乐开启</li>
-              <li id="music-close">音乐关闭</li>
+              <li id="music-open" class="active">音乐开启</li>
+              <li id="music-close" class="active">音乐关闭</li>
             </ul>
           </div>
 
@@ -42,42 +42,46 @@
           </ul>
         </div>
     </div>
-    <div id="content">
+    <div id="content-container">
+      <div id="content">
         <div class="note welcome">
-            <div class="note-title">
-              <div class="note-time">2222年x月xx日</div>
-              <div class="note-delete">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-cha"></use>
-                </svg>
-              </div>
-            </div>
-            <div class="note-content">
-              欢迎使用FDonkey在线便利贴！
-            </div>
-            <div class="note-imp-stars">
-              <svg class="imp icon" aria-hidden="true">
-                <use xlink:href="#icon-star"></use>
-              </svg>
-              <svg class="imp icon" aria-hidden="true">
-                <use xlink:href="#icon-star"></use>
-              </svg>
-              <svg class="imp icon" aria-hidden="true">
-                <use xlink:href="#icon-star"></use>
-              </svg>
+          <div class="note-title">
+            <div class="note-time">xxxx年x月xx日</div>
+            <div class="note-delete">
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-star"></use>
-              </svg>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-star"></use>
+                <use xlink:href="#icon-cha"></use>
               </svg>
             </div>
-            <div class="done">
-              已完成
-            </div>
+          </div>
+          <div class="note-content">
+            欢迎使用FDonkey在线便利贴！
+          </div>
+          <div class="note-imp-stars">
+            <svg class="imp icon" aria-hidden="true">
+              <use xlink:href="#icon-star"></use>
+            </svg>
+            <svg class="imp icon" aria-hidden="true">
+              <use xlink:href="#icon-star"></use>
+            </svg>
+            <svg class="imp icon" aria-hidden="true">
+              <use xlink:href="#icon-star"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-star"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-star"></use>
+            </svg>
+          </div>
+          <div class="done">
+            已完成
+          </div>
         </div>
+
+      </div>
     </div>
-    <div id="new-note-cover"></div>
+    <div id="new-note-cover">
+    </div>
     <div id="new-note-container">
       <div id="new-note">
         <div class="new-note-title-container">
@@ -126,7 +130,7 @@
         </svg>
       </div>
     </div>
-    <audio id="music" autoplay loop src="https://m128.xiami.net/158/7158/168024/2072884_1519910051548.mp3?auth_key=1545188400-0-0-7cff6802373bfd8a707771dc85b2e342"></audio>
+    <audio id="music" loop src="http://pjnu8j8vr.bkt.clouddn.com/906010680.mp3"></audio>
     <script src="/js/index.js"></script>
   </body>
 </html>

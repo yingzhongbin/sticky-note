@@ -18,9 +18,6 @@ Note.prototype = {
   createNote(options){
     let tempOptions = {}
     Object.assign(tempOptions,this.defaultOptions,options)
-    console.log('createNote');
-    console.log(options);
-    console.log(tempOptions);
     let tpl =  `
       <div class="note">
         <div class="note-title">
@@ -129,22 +126,20 @@ Note.prototype = {
       let svgs = this.$note.find('.note-imp-stars').find('svg')
       let stars = 0
       for(let i=0;i<svgs.length;i++){
-        console.log(svgs[i].classList);
         if(svgs[i].classList[1] === 'imp' || svgs[i].classList[0] === 'imp'){
           console.log('哈');
           stars++
         }
       }
-      console.log(stars);
-
       // 获取note content
       let content = this.$note.find('.note-content').html()
 
       //获取是否完成
       let over = 0
-      if(this.$note.find('.done.over')){
+      if(this.$note.find('.done.over').html() === undefined){
         over = 1
       }
+      console.log(over);
       let nowState = {
         content,
         stars,
@@ -161,6 +156,7 @@ Note.prototype = {
             over
           }
           console.log('true');
+          console.log(opt);
           this.update(opt)
         }
       })
