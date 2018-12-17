@@ -29,43 +29,9 @@ var NoteManager = (function(){
                 }
               })
             }
-            let welcome = `
-            <div class="note welcome">
-              <div class="note-title">
-                <div class="note-time">xxxx年x月xx日</div>
-                <div class="note-delete">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-cha"></use>
-                  </svg>
-                </div>
-              </div>
-              <div class="note-content">
-                欢迎使用FDonkey在线便利贴！
-              </div>
-              <div class="note-imp-stars">
-                <svg class="imp icon" aria-hidden="true">
-                  <use xlink:href="#icon-star"></use>
-                </svg>
-                <svg class="imp icon" aria-hidden="true">
-                  <use xlink:href="#icon-star"></use>
-                </svg>
-                <svg class="imp icon" aria-hidden="true">
-                  <use xlink:href="#icon-star"></use>
-                </svg>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-star"></use>
-                </svg>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-star"></use>
-                </svg>
-              </div>
-              <div class="done">
-                已完成
-              </div>
-            </div>
-            `
-            $('#content').prepend($(welcome))
-            Waterfall.init('#content')
+            if($('#content').children().length > 0){
+              Waterfall.init('#content')
+            }
             localStorage.setItem('login',true)
           }else{
             Toast(res.errorMsg)

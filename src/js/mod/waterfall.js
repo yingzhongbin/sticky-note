@@ -1,3 +1,4 @@
+let orderNotes = require('./order-notes').orderNotes
 let Waterfall = (function(){
   let $content
   let items
@@ -16,10 +17,13 @@ let Waterfall = (function(){
     }
   }
   function render(content){
+    // notes排序
+    orderNotes()
+
     $content = $(content)
     items = $content.children()
     // 各列宽度
-    let itemWidth = $(items[0]).outerWidth(true)
+    let itemWidth = $(items[0]).outerWidth(true)-1
     // 共几列
     let columnNum = Math.floor(980/itemWidth)
     // 各列高度数组

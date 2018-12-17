@@ -6,6 +6,7 @@ require('../mod/music-play')
 require('../mod/welcome-note')
 require('../mod/nav')
 require('../mod/load')
+require('../mod/set-order')
 
 
 

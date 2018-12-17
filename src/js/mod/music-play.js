@@ -4,13 +4,13 @@ module.exports = !function () {
   $('#music-open').on('click',function () {
     console.log('music-open');
     audio.play();
-    $('#music-open').hide()
-    $('#music-close').show()
+    $('#music-open').addClass('chosen')
+    $('#music-close').removeClass('chosen')
   })
   $('#music-close').on('click',function () {
     console.log('music-close');
     audio.pause();
-    $('#music-close').hide()
-    $('#music-open').show()
+    $('#music-close').addClass('chosen')
+    $('#music-open').removeClass('chosen')
   })
 }()

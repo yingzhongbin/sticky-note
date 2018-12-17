@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  box-shadow: 0px 12px 18px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
   z-index: 11;
   #header-container{
     height: 74px;
@@ -36,20 +36,20 @@
         min-width: 400px;
         display: flex;
         flex-direction: row;
-        //justify-content: center;
         align-items: center;
-        li{
+        > li{
           font-weight: 200;
           font-size: 20px;
           margin-left: 47px;
-          position: relative;
           transition: opacity .5s;
-          &:hover{
-            color:#00DDAC;
-            &:before{
-              opacity: 1;
-            }
-            cursor: pointer;
+          position: relative;
+          > div.connect{
+            position: absolute;
+            height: 20px;
+            width:170%;
+            background-color: red;
+            left: -15px;
+            opacity: 0;
           }
           &:before{
             transition: opacity .5s;
@@ -62,14 +62,53 @@
             left:10%;
             opacity: 0;
           }
+          > ul{
+            width:78px;
+            position: absolute;
+            top: 45px;
+            font-size: 16px;
+            left: -16px;
+            list-style-type: none;
+            color:black;
+            border-radius: 3px;
+            box-shadow: 0 0 25px 0 rgba(0,0,0,.16);
+            padding: 10px;
+            background-color: white;
+            display: none;
+            > li{
+              text-align: center;
+              padding:5px;
+              word-break: keep-all;
+              font-weight: 200;
+              &:hover{
+                color:#00E8AF;
+              }
+            }
+            > li.chosen{
+              color:#00E8AF;
+            }
+          }
+          &:hover{
+            color:#00DDAC;
+            &:before{
+              opacity: 1;
+            }
+            cursor: pointer;
+            >ul{
+              display: block;
+              >li{
+              }
+            }
+          }
+
         }
-        li.active{
+        /*> li.active{
           color:#00DDAC;
           &:before{
             opacity: 1;
           }
           cursor: pointer;
-        }
+        }*/
       }
     }
     #user-area{
@@ -310,7 +349,4 @@ ul,li{
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
-}
-#music-close{
-  display: none;
 }

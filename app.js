@@ -9,8 +9,6 @@ var passport = require('passport');
 var session = require('express-session');
 
 var index = require('./routes/index');
-var xxxRouter = require('./routes/xxx');
-// var all = require('./routes/all');
 var api = require('./routes/api')
 var auth = require('./routes/auth')
 var app = express();
@@ -38,7 +36,6 @@ app.use('/', index); //我的便签
 // app.use('/all', all); //全部便签
 app.use('/api',api) //ajax接口
 app.use('/auth',auth)//登录
-app.use('/xxx', xxxRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

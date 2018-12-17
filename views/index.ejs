@@ -15,11 +15,59 @@
               <img id="img2" src="../imgs/test.png" alt="notelogo">
             </div>
             <ul class="nav">
-              <li id="nav-all" class="active">全部</li>
-              <li id="nav-no-over">未完成</li>
-              <li id="nav-over">已完成</li>
-              <li id="music-open" class="active">音乐开启</li>
-              <li id="music-close" class="active">音乐关闭</li>
+              <!--<li id="nav-all" class="active">-->
+                  <!--<span>全部</span>-->
+                  <!--<ul>-->
+                      <!--<li>正序</li>-->
+                      <!--<li>反序</li>-->
+                  <!--</ul>-->
+              <!--</li>-->
+              <!--<li id="nav-no-over">未完成</li>-->
+              <!--<li id="nav-over">已完成</li>-->
+
+              <li id="scope">
+                <span>
+                  范围
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-fanwei"></use>
+                  </svg>
+                </span>
+
+                <div class="connect"></div>
+                <ul>
+                  <li class="chosen" id="nav-all">全部</li>
+                  <li id="nav-no-over">未完成</li>
+                  <li id="nav-over">已完成</li>
+                </ul>
+              </li>
+              <li id="reorder">
+                  <span>
+                    排序
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-paixu"></use>
+                    </svg>
+                  </span>
+
+                  <div class="connect"></div>
+                  <ul>
+                    <li class="chosen" id="des-order">降序</li>
+                    <li id="asc-order">升序</li>
+                  </ul>
+              </li>
+
+              <li class="active">
+                  <span>
+                    音乐
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-neirongqiehuan"></use>
+                    </svg>
+                  </span>
+                  <div class="connect"></div>
+                  <ul>
+                    <li id="music-close" class="chosen">关闭</li>
+                    <li id="music-open">开启</li>
+                  </ul>
+              </li>
             </ul>
           </div>
 

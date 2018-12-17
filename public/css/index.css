@@ -8,7 +8,7 @@
   -ms-flex-pack: center;
   justify-content: center;
   background-color: #fff;
-  box-shadow: 0px 12px 18px -9px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
   z-index: 11;
 }
 #header #header-container {
@@ -55,22 +55,30 @@
   flex-direction: row;
   -ms-flex-align: center;
   align-items: center;
+  /*> li.active{
+          color:#00DDAC;
+          &:before{
+            opacity: 1;
+          }
+          cursor: pointer;
+        }*/
 }
-#header #header-container #left-container ul.nav li {
+#header #header-container #left-container ul.nav > li {
   font-weight: 200;
   font-size: 20px;
   margin-left: 47px;
-  position: relative;
   transition: opacity .5s;
+  position: relative;
 }
-#header #header-container #left-container ul.nav li:hover {
-  color: #00DDAC;
-  cursor: pointer;
+#header #header-container #left-container ul.nav > li > div.connect {
+  position: absolute;
+  height: 20px;
+  width: 170%;
+  background-color: red;
+  left: -15px;
+  opacity: 0;
 }
-#header #header-container #left-container ul.nav li:hover:before {
-  opacity: 1;
-}
-#header #header-container #left-container ul.nav li:before {
+#header #header-container #left-container ul.nav > li:before {
   transition: opacity .5s;
   content: '';
   height: 4px;
@@ -81,12 +89,41 @@
   left: 10%;
   opacity: 0;
 }
-#header #header-container #left-container ul.nav li.active {
+#header #header-container #left-container ul.nav > li > ul {
+  width: 78px;
+  position: absolute;
+  top: 45px;
+  font-size: 16px;
+  left: -16px;
+  list-style-type: none;
+  color: black;
+  border-radius: 3px;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.16);
+  padding: 10px;
+  background-color: white;
+  display: none;
+}
+#header #header-container #left-container ul.nav > li > ul > li {
+  text-align: center;
+  padding: 5px;
+  word-break: keep-all;
+  font-weight: 200;
+}
+#header #header-container #left-container ul.nav > li > ul > li:hover {
+  color: #00E8AF;
+}
+#header #header-container #left-container ul.nav > li > ul > li.chosen {
+  color: #00E8AF;
+}
+#header #header-container #left-container ul.nav > li:hover {
   color: #00DDAC;
   cursor: pointer;
 }
-#header #header-container #left-container ul.nav li.active:before {
+#header #header-container #left-container ul.nav > li:hover:before {
   opacity: 1;
+}
+#header #header-container #left-container ul.nav > li:hover > ul {
+  display: block;
 }
 #header #header-container a {
   min-width: 95px;
@@ -343,9 +380,6 @@ li {
   fill: currentColor;
   overflow: hidden;
 }
-#music-close {
-  display: none;
-}
 .toast {
   position: fixed;
   left: 50%;
@@ -370,7 +404,7 @@ li {
   border: 1px solid #E8E8E8;
   color: gray;
   margin: 23px 17px 0;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.3s;
 }
 .note:hover {
