@@ -11,14 +11,14 @@ const sequelize = new Sequelize(undefined, undefined, undefined, {
 
 //建表
 
-// sequelize
-//     .authenticate()
-//     .then(() => {
-//       console.log('Connection has been established successfully.');
-//     })
-//     .catch(err => {
-//       console.error('Unable to connect to the database:', err);
-//     });
+sequelize
+    .authenticate()
+    .then(() => {
+      console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
+    });
 
 const Note = sequelize.define('note', {
   content: {
@@ -36,15 +36,15 @@ const Note = sequelize.define('note', {
 
 //创建时间createdAt
 //force: true 如果表已经存在，将会丢弃表
-// Note.sync({force: true}).then(() => {
-//   // 表已创建
-//   return Note.create({
-//     content: 'fuck',
-//     uid:'36562860',
-//     stars:3,
-//     over:true
-//   });
-// });
+Note.sync({force: true}).then(() => {
+  // 表已创建
+  return Note.create({
+    content: '欢迎使用FDonkey在线便签',
+    uid:'36562860',
+    stars:3,
+    over:true
+  });
+});
 
 //添加
 // Note.create({

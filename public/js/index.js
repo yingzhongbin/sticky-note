@@ -84,9 +84,9 @@
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var Toast = __webpack_require__(4).Toast
+/* WEBPACK VAR INJECTION */(function($) {var Toast = __webpack_require__(2).Toast
 var Note = __webpack_require__(21).Note
-var Waterfall = __webpack_require__(2)
+var Waterfall = __webpack_require__(3)
 
 var NoteManager = (function(){
   function load(choose = 2){
@@ -146,6 +146,41 @@ module.exports.NoteManager = NoteManager
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(16)
+function toast(msg, time){
+  this.msg = msg
+  this.time = time
+  this.createToast()
+  this.showToast()
+}
+toast.prototype = {
+  createToast(){
+    let template = `<div class="toast">${this.msg}</div>`
+    this.$toast = $(template)
+    $('body').append(this.$toast)
+  },
+  showToast(){
+    let self = this
+    this.$toast.fadeIn(600,function(){
+      setTimeout(function () {
+        self.$toast.fadeOut(600,function(){
+          self.$toast.remove()
+        })
+      },self.time)
+    })
+  }
+}
+function Toast(msg,time) {
+  return new toast(msg,time)
+}
+// window.Toast = Toast
+module.exports.Toast = Toast
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {let orderNotes = __webpack_require__(22).orderNotes
@@ -209,7 +244,7 @@ module.exports = Waterfall
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 let EventCenter = (function(){
@@ -232,48 +267,8 @@ let EventCenter = (function(){
     emit:emit
   }
 })()
-let ec = EventCenter
-ec.on('a',function (arg) {
-  // alert(arg)
-})
-ec.emit('a','fuck')
 module.exports = EventCenter
 
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(16)
-function toast(msg, time){
-  this.msg = msg
-  this.time = time
-  this.createToast()
-  this.showToast()
-}
-toast.prototype = {
-  createToast(){
-    let template = `<div class="toast">${this.msg}</div>`
-    this.$toast = $(template)
-    $('body').append(this.$toast)
-  },
-  showToast(){
-    let self = this
-    this.$toast.fadeIn(600,function(){
-      setTimeout(function () {
-        self.$toast.fadeOut(600,function(){
-          self.$toast.remove()
-        })
-      },self.time)
-    })
-  }
-}
-function Toast(msg,time) {
-  return new toast(msg,time)
-}
-// window.Toast = Toast
-module.exports.Toast = Toast
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 5 */
@@ -291,7 +286,8 @@ module.exports.Toast = Toast
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {module.exports = !function(){
+/* WEBPACK VAR INJECTION */(function($) {const Toast = __webpack_require__(2).Toast
+module.exports = !function(){
 
   //设置fix-container随页面滚动而滚动
   $('#fix-container').css('top',(window.scrollY+window.innerHeight-200)+'px')
@@ -337,8 +333,8 @@ module.exports.Toast = Toast
 /***/ (function(module, exports, __webpack_require__) {
 
 let NoteManager = __webpack_require__(1).NoteManager
-let Event = __webpack_require__(3)
-let Waterfall = __webpack_require__(2)
+let Event = __webpack_require__(4)
+let Waterfall = __webpack_require__(3)
 module.exports = !function () {
   //页面载入
   NoteManager.load()
@@ -506,7 +502,7 @@ module.exports = !function () {
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {let Waterfall = __webpack_require__(2)
+/* WEBPACK VAR INJECTION */(function($) {let Waterfall = __webpack_require__(3)
 module.exports = !function () {
   $('#asc-order').on('click',function () {
     $('#asc-order').addClass('chosen')
@@ -1752,8 +1748,8 @@ __webpack_require__(12)
 
 /* WEBPACK VAR INJECTION */(function($) {__webpack_require__(15);
 
-var Toast = __webpack_require__(4).Toast;
-var Event = __webpack_require__(3);
+var Toast = __webpack_require__(2).Toast;
+var Event = __webpack_require__(4);
 
 function Note(options){
   this.createNote(options)

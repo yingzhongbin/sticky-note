@@ -1,3 +1,4 @@
+const Toast = require('./toast').Toast
 module.exports = !function(){
 
   //设置fix-container随页面滚动而滚动

@@ -17,7 +17,7 @@ router.get('/notes', function(req, res, next) {
     console.log(data);
     res.send({status: 0, data: data});
   }).catch(function(e){
-    res.send({ status: 1,errorMsg: 'xxxx数据库异常'});
+    res.send({ status: 1,errorMsg: '数据库异常'});
   });
 });
 router.post('/notes/add', function(req, res, next) {
