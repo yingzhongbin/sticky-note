@@ -18,9 +18,4 @@ let EventCenter = (function(){
     emit:emit
   }
 })()
-let ec = EventCenter
-ec.on('a',function (arg) {
-  // alert(arg)
-})
-ec.emit('a','fuck')
 module.exports = EventCenter
